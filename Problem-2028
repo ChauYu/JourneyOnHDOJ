@@ -1,0 +1,136 @@
+/*
+Lowest Common Multiple Plus
+Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 65536/32768 K (Java/Others)
+Total Submission(s): 70913    Accepted Submission(s): 29423
+
+
+Problem Description
+求n个数的最小公倍数。
+ 
+
+Input
+输入包含多个测试实例，每个测试实例的开始是一个正整数n，然后是n个正整数。
+ 
+
+Output
+为每组测试数据输出它们的最小公倍数，每个测试实例的输出占一行。你可以假设最后的输出是一个32位的整数。
+ 
+
+Sample Input
+2 4 6
+3 2 5 7
+ 
+
+Sample Output
+12
+70
+*/
+
+
+AC代码：
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        while(sc.hasNext())
+        {
+            int n=sc.nextInt();
+            int[] a=new int[100];
+            int max=0;
+            
+            for(int i=0;i<n;i++)
+            {
+                a[i]=sc.nextInt();
+                if(a[i]>max) max=a[i];
+            }
+
+            int sum=1;
+            for(int j=2;j<=max;j++)
+            {
+                boolean flag=false;
+                for(int i=0;i<n;i++)
+                {
+                    if(a[i]%j==0)
+                    {
+                        a[i]/=j;
+                        flag=true;
+                    }
+                }
+
+                if(flag)
+                {
+                    sum*=j;
+                    j--;
+                }
+            }
+
+            for(int i=0;i<n;i++)
+            {
+                sum*=a[i];
+            }
+            System.out.println(sum);
+        }
+    }
+}
+
+
+我的代码，我觉得没错啊！！！！同样都是碾转相除法！！！AC不了！！！！！！！！！
+
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        while(sc.hasNext())
+        {
+            int n=sc.nextInt();
+            int[] a=new int[100];
+            int max=0;
+            int[] num=new int[100];
+            int k=0;
+            for(int i=0;i<n;i++)
+            {
+                a[i]=sc.nextInt();
+                if(a[i]>max) max=a[i];
+            }
+
+            for(int j=1;j<=max;j++)
+            {
+                boolean flag=true;
+                for(int i=0;i<n;i++)
+                {
+                    if(a[i]%j!=0) flag=false;
+                    continue;
+                }
+
+                if(flag)
+                {
+                    num[k++]=j;
+                    for(int i=0;i<n;i++)
+                    {
+                        a[i]/=j;
+                    }
+                }
+            }
+
+            int sum=1;
+            for(int i=0;i<k;i++)
+            {
+                sum*=num[i];
+
+            }
+            for(int i=0;i<n;i++)
+            {
+                sum*=a[i];
+            }
+            System.out.println(sum);
+        }
+    }
+}
+
+
